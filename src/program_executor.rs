@@ -1,7 +1,7 @@
 use std::fs;
 use std::str::FromStr;
 
-use anchor_syn::idl::types::{
+use crate::syn_types::{
     Idl, IdlAccountItem, IdlInstruction, IdlType, IdlTypeDefinition, IdlTypeDefinitionTy,
 };
 use anyhow::{Error, Result};
@@ -13,7 +13,7 @@ use solana_sdk::signature::Keypair;
 use solana_sdk::signer::Signer;
 use solana_sdk::transaction::Transaction;
 
-use flare::{read_wallet_file, Context, Wallet};
+use crate::utils::{read_wallet_file, Context, Wallet};
 
 //use crate::idl::{Idl, IdlEnumType, IdlInstruction, IdlKind, IdlType};
 use solana_program::pubkey::Pubkey;
@@ -396,7 +396,7 @@ impl<'a> ProgramExecutor<'a> {
         let blockhash = self.context.rpc_client.get_latest_blockhash()?;
         let tx = Transaction::new_signed_with_payer(
             &[instruction],
-            Some(&payer.key_pair.pubkey()),
+            Some(&payer.key_pair.try_pubkey()?),
             signers,
             blockhash,
         );

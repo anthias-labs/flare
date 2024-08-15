@@ -1,14 +1,16 @@
-use flare::{self, generate_pda_address, try_get_default_rpc};
-use flare::{
-    new_wallet, read_wallet_file, sign_message, wallet_from_seed_phrase, write_wallet_file,
-    Context, Wallet,
-};
-
 mod idl;
 mod program_executor;
+mod syn_types;
+mod utils;
 
 mod args;
 use args::{FlareCli, FlareCommand};
+
+use utils::{generate_pda_address, try_get_default_rpc};
+use utils::{
+    new_wallet, read_wallet_file, sign_message, wallet_from_seed_phrase, write_wallet_file,
+    Context, Wallet,
+};
 
 use program_executor::ProgramExecutor;
 use std::fs::File;

@@ -19,12 +19,13 @@ use solana_sdk::{
 
 use anchor_lang::idl::IdlAccount;
 use anchor_lang::AnchorDeserialize;
-use anchor_syn::idl::types::Idl;
 use flate2::read::ZlibDecoder;
 use std::io::Read;
 
 use serde_yml;
 use std::collections::HashMap;
+
+use crate::syn_types::Idl;
 
 const URL: &str = "https://api.mainnet-beta.solana.com";
 
